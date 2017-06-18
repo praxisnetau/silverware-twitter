@@ -1,3 +1,3 @@
 <div $AttributesHTML>
-  <a class="$LinkClass" href="$Link" data-size="$ButtonSize">Tweet</a>
+  <a $ButtonAttributesHTML>Tweet</a>
 </div>

@@ -18,12 +18,12 @@
 namespace SilverWare\Twitter\Components;
 
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\ArrayLib;
 use SilverWare\Components\BaseComponent;
+use SilverWare\Forms\FieldSection;
 
 /**
  * An extension of the base component class for a Twitter timeline widget.
@@ -165,10 +165,12 @@ class TwitterTimelineWidget extends BaseComponent
         
         // Create Style Fields:
         
-        $fields->addFieldsToTab(
+        $fields->addFieldToTab(
             'Root.Style',
-            [
-                CompositeField::create([
+            FieldSection::create(
+                'TwitterTimelineWidgetStyle',
+                $this->i18n_singular_name(),
+                [
                     DropdownField::create(
                         'Theme',
                         $this->fieldLabel('Theme'),
@@ -182,16 +184,18 @@ class TwitterTimelineWidget extends BaseComponent
                         'Height',
                         $this->fieldLabel('Height')
                     )
-                ])->setName('TwitterTimelineWidgetStyle')->setTitle($this->i18n_singular_name())
-            ]
+                ]
+            )
         );
         
         // Create Options Fields:
         
-        $fields->addFieldsToTab(
+        $fields->addFieldToTab(
             'Root.Options',
-            [
-                CompositeField::create([
+            FieldSection::create(
+                'TwitterTimelineWidgetOptions',
+                $this->i18n_singular_name(),
+                [
                     DropdownField::create(
                         'NumberOfTweets',
                         $this->fieldLabel('NumberOfTweets'),
@@ -222,8 +226,8 @@ class TwitterTimelineWidget extends BaseComponent
                         'Transparent',
                         $this->fieldLabel('Transparent')
                     )
-                ])->setName('TwitterTimelineWidgetOptions')->setTitle($this->i18n_singular_name())
-            ]
+                ]
+            )
         );
         
         // Answer Field Objects:
@@ -266,8 +270,8 @@ class TwitterTimelineWidget extends BaseComponent
         $labels['HideFooter'] = _t(__CLASS__ . '.HIDEFOOTER', 'Hide footer');
         $labels['HideBorders'] = _t(__CLASS__ . '.HIDEBORDERS', 'Hide borders');
         $labels['HideScrollbar'] = _t(__CLASS__ . '.HIDEHEADER', 'Hide scrollbar');
-        $labels['Transparent'] = _t(__CLASS__ . '.TRANSPARENT', 'Transparent');
         $labels['NumberOfTweets'] = _t(__CLASS__ . '.NUMBEROFTWEETS', 'Number of tweets');
+        $labels['Transparent'] = _t(__CLASS__ . '.TRANSPARENT', 'Transparent');
         
         // Answer Field Labels:
         
@@ -276,6 +280,8 @@ class TwitterTimelineWidget extends BaseComponent
     
     /**
      * Event method called before the receiver is written to the database.
+     *
+     * @return void
      */
     public function onBeforeWrite()
     {

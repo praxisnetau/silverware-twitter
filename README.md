@@ -1,5 +1,9 @@
 # SilverWare Twitter Module
 
+[![Latest Stable Version](https://poser.pugx.org/silverware/twitter/v/stable)](https://packagist.org/packages/silverware/twitter)
+[![Latest Unstable Version](https://poser.pugx.org/silverware/twitter/v/unstable)](https://packagist.org/packages/silverware/twitter)
+[![License](https://poser.pugx.org/silverware/twitter/license)](https://packagist.org/packages/silverware/twitter)
+
 Provides a [Twitter Timeline Widget][twtimelinewidget] component and
 [sharing button][twsharebutton] for use with [SilverWare][silverware].
 
@@ -46,8 +50,8 @@ For more information about the Twitter Timeline Widget, see the [Twitter documen
 ![Twitter Sharing Button](http://i.imgur.com/gc0cnAe.png)
 
 Also provided is a `TwitterSharingButton` which is used with the `SharingComponent`
-from the [SilverWare Social Module][silverware-social]. Simply add this button using
-the Buttons tab on the `SharingComponent`, and your pages will now
+from the [SilverWare Social Module][silverware-social]. Simply add this button as a child of
+`SharingComponent` using the site tree, and your pages will now
 be able to be shared via Twitter.
 
 For more information, see the [Twitter documentation][twsharebutton].

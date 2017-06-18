@@ -17,8 +17,8 @@
 
 namespace SilverWare\Twitter\Buttons;
 
-use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\DropdownField;
+use SilverWare\Forms\FieldSection;
 use SilverWare\Social\Model\SharingButton;
 
 /**
@@ -55,6 +55,14 @@ class TwitterSharingButton extends SharingButton
     private static $plural_name = 'Twitter Sharing Buttons';
     
     /**
+     * Description of this object.
+     *
+     * @var string
+     * @config
+     */
+    private static $description = 'A sharing button to share the current page via Twitter';
+    
+    /**
      * Defines an ancestor class to hide from the admin interface.
      *
      * @var string
@@ -83,6 +91,16 @@ class TwitterSharingButton extends SharingButton
     ];
     
     /**
+     * Maps field and method names to the class names of casting objects.
+     *
+     * @var array
+     * @config
+     */
+    private static $casting = [
+        'ButtonAttributesHTML' => 'HTMLFragment'
+    ];
+    
+    /**
      * Defines the link href for the sharing button.
      *
      * @var string
@@ -105,13 +123,17 @@ class TwitterSharingButton extends SharingButton
         
         $fields->addFieldToTab(
             'Root.Style',
-            CompositeField::create([
-                DropdownField::create(
-                    'ButtonSize',
-                    $this->fieldLabel('ButtonSize'),
-                    $this->getButtonSizeOptions()
-                )
-            ])->setName('TwitterSharingButtonStyle')->setTitle($this->i18n_singular_name())
+            FieldSection::create(
+                'TwitterSharingButtonStyle',
+                $this->i18n_singular_name(),
+                [
+                    DropdownField::create(
+                        'ButtonSize',
+                        $this->fieldLabel('ButtonSize'),
+                        $this->getButtonSizeOptions()
+                    )
+                ]
+            )
         );
         
         // Answer Field Objects:
@@ -142,19 +164,31 @@ class TwitterSharingButton extends SharingButton
     }
     
     /**
-     * Populates the default values for the fields of the receiver.
+     * Answers an array of HTML tag attributes for the button.
      *
-     * @return void
+     * @return array
      */
-    public function populateDefaults()
+    public function getButtonAttributes()
     {
-        // Populate Defaults (from parent):
+        $attributes = [
+            'class' => $this->LinkClass,
+            'href' => $this->ButtonLink,
+            'data-size' => $this->ButtonSize
+        ];
         
-        parent::populateDefaults();
+        $this->extend('updateButtonAttributes', $attributes);
         
-        // Populate Defaults:
-        
-        $this->Name = _t(__CLASS__ . '.SHAREVIATWITTER', 'Share via Twitter');
+        return $attributes;
+    }
+    
+    /**
+     * Answers the HTML tag attributes for the button as a string.
+     *
+     * @return string
+     */
+    public function getButtonAttributesHTML()
+    {
+        return $this->getAttributesHTML($this->getButtonAttributes());
     }
     
     /**
@@ -178,7 +212,7 @@ class TwitterSharingButton extends SharingButton
      *
      * @return string
      */
-    public function getLink()
+    public function getButtonLink()
     {
         return $this->config()->link_href;
     }
