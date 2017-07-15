@@ -124,8 +124,8 @@ class TwitterSharingButton extends SharingButton
         $fields->addFieldToTab(
             'Root.Style',
             FieldSection::create(
-                'TwitterSharingButtonStyle',
-                $this->i18n_singular_name(),
+                'ButtonStyle',
+                $this->fieldLabel('ButtonStyle'),
                 [
                     DropdownField::create(
                         'ButtonSize',
@@ -157,6 +157,7 @@ class TwitterSharingButton extends SharingButton
         // Define Field Labels:
         
         $labels['ButtonSize'] = _t(__CLASS__ . '.BUTTONSIZE', 'Button size');
+        $labels['ButtonStyle'] = _t(__CLASS__ . '.BUTTON', 'Button');
         
         // Answer Field Labels:
         

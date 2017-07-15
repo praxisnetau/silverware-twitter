@@ -168,8 +168,8 @@ class TwitterTimelineWidget extends BaseComponent
         $fields->addFieldToTab(
             'Root.Style',
             FieldSection::create(
-                'TwitterTimelineWidgetStyle',
-                $this->i18n_singular_name(),
+                'WidgetStyle',
+                $this->fieldLabel('WidgetStyle'),
                 [
                     DropdownField::create(
                         'Theme',
@@ -193,8 +193,8 @@ class TwitterTimelineWidget extends BaseComponent
         $fields->addFieldToTab(
             'Root.Options',
             FieldSection::create(
-                'TwitterTimelineWidgetOptions',
-                $this->i18n_singular_name(),
+                'WidgetOptions',
+                $this->fieldLabel('WidgetOptions'),
                 [
                     DropdownField::create(
                         'NumberOfTweets',
@@ -272,6 +272,7 @@ class TwitterTimelineWidget extends BaseComponent
         $labels['HideScrollbar'] = _t(__CLASS__ . '.HIDEHEADER', 'Hide scrollbar');
         $labels['NumberOfTweets'] = _t(__CLASS__ . '.NUMBEROFTWEETS', 'Number of tweets');
         $labels['Transparent'] = _t(__CLASS__ . '.TRANSPARENT', 'Transparent');
+        $labels['WidgetStyle'] = $labels['WidgetOptions'] = _t(__CLASS__ . '.WIDGET', 'Widget');
         
         // Answer Field Labels:
         
