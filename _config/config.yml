@@ -6,7 +6,7 @@ Name: silverware-twitter
 
 SilverStripe\CMS\Controllers\ContentController:
   required_js:
-    - silverware-twitter/client/dist/js/bundle.js
+    - "silverware/twitter: client/dist/js/bundle.js"
 
 # Configure Site Configuration:
 
