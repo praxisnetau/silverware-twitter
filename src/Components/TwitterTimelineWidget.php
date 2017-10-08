@@ -72,7 +72,7 @@ class TwitterTimelineWidget extends BaseComponent
      * @var string
      * @config
      */
-    private static $icon = 'silverware-twitter/admin/client/dist/images/icons/TwitterTimelineWidget.png';
+    private static $icon = 'silverware/twitter: admin/client/dist/images/icons/TwitterTimelineWidget.png';
     
     /**
      * Defines an ancestor class to hide from the admin interface.
