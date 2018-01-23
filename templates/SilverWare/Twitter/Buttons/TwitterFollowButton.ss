@@ -1,0 +1,1 @@
+<a $LinkAttributesHTML>$Text</a>
